@@ -1,0 +1,34 @@
+import type { Metadata } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
+import MetaPixel from "@/components/MetaPixel";
+import "./globals.css";
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "GoEasyAI | Stop Losing Clients to Manual Processes",
+  description:
+    "Complete AI systems that automate your insurance and real estate operations, capture every lead, and deliver measurable ROI in 30 days.",
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-navy-900 text-cream">
+        {children}
+        <MetaPixel />
+      </body>
+    </html>
+  );
+}
