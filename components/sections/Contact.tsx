@@ -1,13 +1,26 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { businessTypes } from "@/lib/site-data";
-import { submitLead } from "@/lib/submit-lead";
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+const WEBHOOK_URL = "/api/lead-webhook";
+const BOOKING_URL =
+  "https://superadmin.goeasyai.ca/v3/goeasyai-30-min-discovery-call/consultation";
 
 export default function Contact() {
-  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [message, setMessage] = useState("");
+
   const [status, setStatus] = useState<"idle" | "submitting" | "error">(
     "idle"
   );
@@ -15,24 +28,43 @@ export default function Contact() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!name.trim() || !email.trim()) {
+      setStatus("error");
+      setError("Please fill in your name and email.");
+      return;
+    }
+
     setStatus("submitting");
     setError(null);
 
-    const form = new FormData(e.currentTarget);
-
     try {
-      await submitLead({
-        name: String(form.get("name") ?? ""),
-        email: String(form.get("email") ?? ""),
-        phone: String(form.get("phone") ?? ""),
-        businessType: String(form.get("businessType") ?? ""),
-        message: String(form.get("message") ?? ""),
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          business_type: businessType,
+          message,
+        }),
       });
-      router.push("/thank-you");
+
+      if (!res.ok) {
+        throw new Error(`Lead webhook responded with ${res.status}`);
+      }
+
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "Lead");
+      }
+      window.location.href = BOOKING_URL;
     } catch (err) {
       setStatus("error");
       setError(
-        err instanceof Error ? err.message : "Something went wrong. Please try again."
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again."
       );
     }
   }
@@ -67,6 +99,8 @@ export default function Contact() {
                 id="name"
                 name="name"
                 required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
               />
             </div>
@@ -80,6 +114,8 @@ export default function Contact() {
                 name="email"
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
               />
             </div>
@@ -92,7 +128,8 @@ export default function Contact() {
                 id="phone"
                 name="phone"
                 type="tel"
-                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
               />
             </div>
@@ -107,13 +144,11 @@ export default function Contact() {
               <select
                 id="businessType"
                 name="businessType"
-                required
-                defaultValue=""
+                value={businessType}
+                onChange={(e) => setBusinessType(e.target.value)}
                 className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
               >
-                <option value="" disabled>
-                  Select one
-                </option>
+                <option value="">Select one</option>
                 {businessTypes.map((type) => (
                   <option key={type} value={type}>
                     {type}
@@ -131,6 +166,8 @@ export default function Contact() {
               id="message"
               name="message"
               rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
             />
           </div>
