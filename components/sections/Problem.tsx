@@ -31,6 +31,7 @@ export default function Problem() {
             />
           </div>
 
+
           <div className="flex flex-col gap-5">
             {problemCards.map((card, i) => (
               <motion.div
