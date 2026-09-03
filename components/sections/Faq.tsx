@@ -15,6 +15,8 @@ export default function Faq() {
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Common <span className="text-gold-500">Implementation Questions</span>
           </h2>
+
+          
         </div>
 
         <div className="mt-12 flex flex-col gap-3">
