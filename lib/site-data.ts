@@ -11,8 +11,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export const strategySessionHref = "/#contact";
-
 // --- Problem section -------------------------------------------------
 
 export type ProblemCard = {
@@ -25,7 +23,7 @@ export const problemCards: ProblemCard[] = [
   {
     icon: AlertTriangle,
     title: "The Speed to Lead Crisis",
-    body: "Research shows leads contacted within 5 minutes are far more likely to qualify than those contacted later — most leads never receive a same-day response.",
+    body: "Faster response times are widely linked to higher conversion — yet many leads never receive a same-day response.",
   },
   {
     icon: Clock,
@@ -35,7 +33,7 @@ export const problemCards: ProblemCard[] = [
   {
     icon: AlertTriangle,
     title: "Manual Follow-Up Failures",
-    body: "Studies show that a 1-hour delay in contacting a web lead drops qualification odds sharply, and insurance leads go cold within 2 hours. Manual systems can't keep up.",
+    body: "Faster response times are widely linked to higher conversion, and leads can go cold within hours. Manual follow-up systems struggle to keep up.",
   },
 ];
 
@@ -76,7 +74,10 @@ export const systems: SystemCard[] = [
 
 // --- Pricing section -----------------------------------------------------
 
+export type PlanSlug = "starter" | "growth" | "scale" | "leadgen";
+
 export type PricingTier = {
+  slug: PlanSlug;
   name: string;
   setupPrice: string;
   monthlyPrice: number;
@@ -87,6 +88,7 @@ export type PricingTier = {
 
 export const pricingTiers: PricingTier[] = [
   {
+    slug: "starter",
     name: "Starter",
     setupPrice: "C$899",
     monthlyPrice: 99,
@@ -100,6 +102,7 @@ export const pricingTiers: PricingTier[] = [
     ],
   },
   {
+    slug: "growth",
     name: "Growth",
     setupPrice: "C$1,899",
     monthlyPrice: 199,
@@ -116,6 +119,7 @@ export const pricingTiers: PricingTier[] = [
     ],
   },
   {
+    slug: "scale",
     name: "Scale",
     setupPrice: "C$3,899",
     monthlyPrice: 299,
@@ -132,10 +136,30 @@ export const pricingTiers: PricingTier[] = [
 ];
 
 export const pricingAddon = {
+  slug: "leadgen" as const,
+  planName: "Lead Generation",
   name: "Lead Generation & Full AI Automation System to Follow Up Leads",
   setupPrice: "C$1,899",
   monthlyPrice: 699,
 };
+
+/** Contact-page link for a plan, e.g. /contact?plan=growth */
+export function planContactHref(slug: PlanSlug) {
+  return `/contact?plan=${slug}`;
+}
+
+/** Message pre-filled into the contact form when arriving from a plan button. */
+export function planInterestMessage(slug: string | undefined) {
+  if (!slug) return "";
+  const tier = pricingTiers.find((t) => t.slug === slug);
+  if (tier) {
+    return `Interested in the ${tier.name} plan`;
+  }
+  if (slug === pricingAddon.slug) {
+    return `Interested in the ${pricingAddon.planName} plan`;
+  }
+  return "";
+}
 
 // --- Results section -----------------------------------------------------
 
@@ -162,7 +186,7 @@ export const results: ResultCard[] = [
   {
     industry: "Real Estate",
     headline: "From 6% to 89% Closing Rate With Instant Response",
-    body: "Real estate team was losing deals due to slow follow-up. Research shows 1-hour delay drops closing to 6%. AI system now responds in under 60 seconds, schedules showings instantly.",
+    body: "Real estate team was losing deals due to slow follow-up. Faster response times are widely linked to higher conversion, so the AI system responds in under 60 seconds and schedules showings instantly.",
     image: "/services-ai-dashboard.jpg",
     stats: [
       { value: "45 sec", label: "Avg Response" },
@@ -204,7 +228,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How do you ensure data security and compliance?",
     answer:
-      "All client data is encrypted in transit and at rest, access is tightly scoped, and our systems are built to align with the compliance standards insurance and real estate businesses are held to.",
+      "Client data is encrypted in transit and at rest, access is tightly scoped, and our systems are built with Canadian privacy laws (PIPEDA / BC PIPA) in mind.",
   },
   {
     question: "What if the AI can't handle a complex question?",
@@ -229,46 +253,36 @@ export type SecurityBadge = {
 export const securityBadges: SecurityBadge[] = [
   {
     icon: Lock,
-    title: "End-to-End Encryption",
-    description:
-      "All data encrypted in transit and at rest with military-grade security protocols.",
+    title: "Encrypted Data",
+    description: "Encrypted data in transit and at rest.",
   },
   {
     icon: ShieldCheck,
-    title: "Industry Compliance",
+    title: "Canadian Privacy Focus",
     description:
-      "HIPAA, SOC 2, and industry-leading compliance built into every interaction.",
+      "Built with Canadian privacy laws in mind (PIPEDA / BC PIPA).",
   },
   {
     icon: Clock,
-    title: "99.9% Uptime",
+    title: "Always-On AI Agents",
     description:
-      "Redundant systems ensure your AI is always available when clients need it.",
+      "Your AI agents answer calls and messages around the clock, including evenings and weekends.",
   },
   {
     icon: Database,
     title: "Data Privacy",
-    description:
-      "Your data is always yours. No sharing, no selling, complete privacy control.",
+    description: "Your data is never sold.",
   },
 ];
 
 // --- Contact / business types -----------------------------------------------------
 
-export const businessTypes = ["Insurance", "Real Estate", "Other"] as const;
-
-// --- Footer -----------------------------------------------------
-
-export const contactInfo = {
-  email: "hello@goeasyai.ca",
-  phone: "+1 (000) 000-0000",
-};
-
-export const socialLinks = [
-  { label: "X", href: "https://x.com/GoEasyAI" },
-  { label: "Instagram", href: "https://instagram.com/GoEasyAI" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/GoEasyAI" },
-  { label: "Facebook", href: "https://facebook.com/GoEasyAI" },
-  { label: "TikTok", href: "https://tiktok.com/@GoEasyAI" },
-  { label: "YouTube", href: "https://youtube.com/@GoEasyAI" },
-];
+export const businessTypes = [
+  "Insurance",
+  "Real Estate",
+  "Immigration",
+  "Healthcare/Clinic",
+  "Restaurant/Hospitality",
+  "Retail",
+  "Other",
+] as const;

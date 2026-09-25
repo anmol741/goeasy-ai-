@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { strategySessionHref, systems } from "@/lib/site-data";
+import { systems } from "@/lib/site-data";
 
 export default function Systems() {
   return (
-    <section className="bg-navy-900 py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="systems" className="bg-navy-900 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Complete AI Systems That{" "}
@@ -22,7 +22,7 @@ export default function Systems() {
             src="/case-study-independent.jpg"
             alt="Abstract visualization of connected AI systems"
             fill
-            sizes="(min-width: 1024px) 1152px, 100vw"
+            sizes="(min-width: 1280px) 1232px, 100vw"
             className="object-cover"
           />
         </div>
@@ -54,7 +54,7 @@ export default function Systems() {
 
         <div className="mt-14 flex justify-center">
           <Link
-            href={strategySessionHref}
+            href="/contact"
             className="rounded-lg bg-gold-500 px-8 py-3.5 text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400"
           >
             Get Started Today

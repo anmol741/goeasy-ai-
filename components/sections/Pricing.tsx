@@ -4,14 +4,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import Link from "next/link";
-import { pricingAddon, pricingTiers, strategySessionHref } from "@/lib/site-data";
+import { pricingAddon, pricingTiers, planContactHref } from "@/lib/site-data";
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section className="bg-navy-950 py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="pricing" className="bg-navy-950 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Recommended <span className="text-gold-500">Canadian Plans</span>
@@ -110,7 +110,7 @@ export default function Pricing() {
                 </ul>
 
                 <Link
-                  href={strategySessionHref}
+                  href={planContactHref(tier.slug)}
                   className={`mt-8 rounded-lg px-6 py-3 text-center text-sm font-semibold transition-transform hover:scale-105 ${
                     tier.featured
                       ? "bg-gold-500 text-navy-950 hover:bg-gold-400"
@@ -141,7 +141,7 @@ export default function Pricing() {
             </p>
           </div>
           <Link
-            href={strategySessionHref}
+            href={planContactHref(pricingAddon.slug)}
             className="shrink-0 rounded-lg bg-gold-500 px-6 py-3 text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400"
           >
             Get Started

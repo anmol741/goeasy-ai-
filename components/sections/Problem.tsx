@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { problemCards, strategySessionHref } from "@/lib/site-data";
+import { problemCards } from "@/lib/site-data";
+import { bookingLinkProps } from "@/lib/site-config";
 
 export default function Problem() {
   return (
-    <section className="bg-navy-950 py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="problem" className="bg-navy-950 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Your Current Systems Are{" "}
@@ -36,8 +37,8 @@ export default function Problem() {
             {problemCards.map((card, i) => (
               <motion.div
                 key={card.title}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="rounded-lg border-l-4 border-amber-500 bg-navy-900 p-6"
@@ -57,14 +58,14 @@ export default function Problem() {
         </div>
 
         <div className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
-            href={strategySessionHref}
+          <a
+            {...bookingLinkProps}
             className="rounded-lg bg-gold-500 px-8 py-3.5 text-center text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400"
           >
             Schedule Your Strategy Session
-          </Link>
+          </a>
           <Link
-            href={strategySessionHref}
+            href="/#roi-calculator"
             className="rounded-lg border border-gold-500/50 px-8 py-3.5 text-center text-sm font-semibold text-gold-400 transition-colors hover:border-gold-500 hover:bg-gold-500/10"
           >
             Calculate Your ROI

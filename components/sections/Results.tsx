@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { results, strategySessionHref } from "@/lib/site-data";
+import { results } from "@/lib/site-data";
 
 export default function Results() {
   return (
-    <section className="bg-navy-900 py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="results" className="bg-navy-950 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
-            Real Results From{" "}
-            <span className="text-gold-500">Real Implementations</span>
+            What AI Automation{" "}
+            <span className="text-gold-500">Can Look Like</span>
           </h2>
           <p className="mt-4 text-cream/70">
-            See how AI systems deliver measurable ROI for insurance and real
-            estate professionals.
+            Example scenarios showing how AI systems can help insurance and
+            real estate professionals respond faster and capture more leads.
           </p>
         </div>
 
@@ -22,21 +22,26 @@ export default function Results() {
             <div
               key={result.headline}
               style={{ animationDelay: `${i * 0.08}s` }}
-              className="animate-fade-up overflow-hidden rounded-xl border border-white/10 bg-navy-950"
+              className="animate-fade-up overflow-hidden rounded-xl border border-white/10 bg-navy-900"
             >
               <div className="relative aspect-4/3 w-full">
                 <Image
                   src={result.image}
-                  alt={`${result.industry} case study — ${result.headline}`}
+                  alt={`${result.industry} illustrative example — ${result.headline}`}
                   fill
                   sizes="(min-width: 1024px) 33vw, 100vw"
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
-                <span className="inline-block rounded-full bg-gold-500/10 px-3 py-1 text-xs font-semibold text-gold-500">
-                  {result.industry}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded-full bg-gold-500/10 px-3 py-1 text-xs font-semibold text-gold-500">
+                    {result.industry}
+                  </span>
+                  <span className="inline-block rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-cream/60">
+                    Illustrative example
+                  </span>
+                </div>
                 <h3 className="mt-4 font-display text-lg font-semibold text-cream">
                   {result.headline}
                 </h3>
@@ -61,9 +66,14 @@ export default function Results() {
           ))}
         </div>
 
-        <div className="mt-14 flex justify-center">
+        <p className="mt-8 text-center text-xs text-cream/50">
+          Scenarios are illustrative and based on typical use cases.
+          Individual results vary.
+        </p>
+
+        <div className="mt-10 flex justify-center">
           <Link
-            href={strategySessionHref}
+            href="/#roi-calculator"
             className="rounded-lg border border-gold-500/50 px-8 py-3.5 text-sm font-semibold text-gold-400 transition-colors hover:border-gold-500 hover:bg-gold-500/10"
           >
             See Your ROI Potential

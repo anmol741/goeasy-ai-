@@ -1,77 +1,11 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
-import { businessTypes } from "@/lib/site-data";
-
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
-
-const WEBHOOK_URL = "/api/lead-webhook";
-const BOOKING_URL =
-  "https://superadmin.goeasyai.ca/v3/goeasyai-30-min-discovery-call/consultation";
+import { Mail, PhoneCall } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
+import { emailHref, phoneHref, siteConfig } from "@/lib/site-config";
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [businessType, setBusinessType] = useState("");
-  const [message, setMessage] = useState("");
-
-  const [status, setStatus] = useState<"idle" | "submitting" | "error">(
-    "idle"
-  );
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    if (!name.trim() || !email.trim()) {
-      setStatus("error");
-      setError("Please fill in your name and email.");
-      return;
-    }
-
-    setStatus("submitting");
-    setError(null);
-
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          business_type: businessType,
-          message,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`Lead webhook responded with ${res.status}`);
-      }
-
-      if (typeof window !== "undefined" && window.fbq) {
-        window.fbq("track", "Lead");
-      }
-      window.location.href = BOOKING_URL;
-    } catch (err) {
-      setStatus("error");
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again."
-      );
-    }
-  }
-
   return (
     <section id="contact" className="bg-navy-900 py-24">
-      <div className="mx-auto max-w-2xl px-6">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6">
         <div className="text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Get in <span className="text-gold-500">Touch</span>
@@ -82,106 +16,35 @@ export default function Contact() {
           </p>
         </div>
 
-        <motion.form
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-5 rounded-xl border border-white/10 bg-navy-950 p-8"
-        >
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-sm font-medium text-cream/80">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium text-cream/80">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="phone" className="text-sm font-medium text-cream/80">
-                Phone
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="businessType"
-                className="text-sm font-medium text-cream/80"
-              >
-                Business Type
-              </label>
-              <select
-                id="businessType"
-                name="businessType"
-                value={businessType}
-                onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
-              >
-                <option value="">Select one</option>
-                {businessTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
+        <div className="mt-10 flex flex-col items-center gap-4 rounded-xl border border-gold-500/30 bg-navy-950 p-6 text-center sm:flex-row sm:text-left">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-500/10 text-gold-500">
+            <PhoneCall size={22} />
           </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="text-sm font-medium text-cream/80">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500"
-            />
+          <div className="flex-1">
+            <a
+              href={phoneHref}
+              className="block font-display text-xl font-semibold text-cream hover:text-gold-400"
+            >
+              {siteConfig.phone.display}
+            </a>
           </div>
-
-          {error && <p className="text-sm text-amber-500">{error}</p>}
-
-          <button
-            type="submit"
-            disabled={status === "submitting"}
-            className="mt-2 rounded-lg bg-gold-500 px-8 py-3.5 text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-60"
+          <a
+            href={phoneHref}
+            className="w-full shrink-0 rounded-lg bg-gold-500 px-6 py-3 text-center text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400 sm:w-auto"
           >
-            {status === "submitting" ? "Sending..." : "Send Message"}
-          </button>
-        </motion.form>
+            Call Now
+          </a>
+        </div>
+
+        <p className="mt-4 flex items-center justify-center gap-2 text-sm text-cream/60">
+          <Mail size={14} />
+          Prefer email?{" "}
+          <a href={emailHref} className="text-gold-500 hover:text-gold-400">
+            {siteConfig.email}
+          </a>
+        </p>
+
+        <ContactForm className="mt-8" />
       </div>
     </section>
   );

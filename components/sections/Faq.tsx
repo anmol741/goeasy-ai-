@@ -9,14 +9,12 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-navy-950 py-24">
-      <div className="mx-auto max-w-3xl px-6">
+    <section id="faq" className="bg-navy-900 py-24">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="text-center">
           <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
             Common <span className="text-gold-500">Implementation Questions</span>
           </h2>
-
-          
         </div>
 
         <div className="mt-12 flex flex-col gap-3">
@@ -29,7 +27,7 @@ export default function Faq() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="overflow-hidden rounded-lg border border-white/10 bg-navy-900"
+                className="overflow-hidden rounded-lg border border-white/10 bg-navy-950"
               >
                 <button
                   type="button"

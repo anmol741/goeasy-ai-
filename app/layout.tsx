@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -14,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: "GoEasyAI | Stop Losing Clients to Manual Processes",
   description:
     "Complete AI systems that automate your insurance and real estate operations, capture every lead, and deliver measurable ROI in 30 days.",

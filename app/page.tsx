@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import Problem from "@/components/sections/Problem";
 import Systems from "@/components/sections/Systems";
 import Pricing from "@/components/sections/Pricing";
+import RoiCalculator from "@/components/sections/RoiCalculator";
 import Results from "@/components/sections/Results";
 import Faq from "@/components/sections/Faq";
 import Security from "@/components/sections/Security";
@@ -18,6 +19,7 @@ export default function Home() {
         <Problem />
         <Systems />
         <Pricing />
+        <RoiCalculator />
         <Results />
         <Faq />
         <Security />
