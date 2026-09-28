@@ -16,14 +16,27 @@ export const siteConfig = {
 export const emailHref = `mailto:${siteConfig.email}`;
 export const phoneHref = `tel:${siteConfig.phone.e164}`;
 
-// Strategy-session booking page. Every booking button uses this and opens
-// it in a new tab via bookingLinkProps.
-export const BOOKING_URL = "https://cal.com/goeasyai/30min?overlayCalendar=true";
+// Strategy-session booking. Every booking button links to our own /book page
+// (Cal.com inline embed) via bookingLinkProps, so the Schedule pixel event fires.
+export const CAL_LINK = "goeasyai/30min";
+export const BOOKING_PATH = "/book";
 export const bookingLinkProps = {
-  href: BOOKING_URL,
-  target: "_blank",
-  rel: "noopener noreferrer",
+  href: BOOKING_PATH,
 } as const;
+
+// Meta Pixel helper. Safe to call anywhere; no-ops on the server or when the
+// pixel hasn't loaded (e.g. blocked by an ad blocker).
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+export function trackPixel(event: string) {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", event);
+  }
+}
 
 // Social profiles. Leave a URL empty ("") or "#" to hide it from the footer.
 export const socialLinks: { label: string; href: string }[] = [

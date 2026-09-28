@@ -4,7 +4,9 @@ import {
   Database,
   Headset,
   Lock,
+  Megaphone,
   MessageCircle,
+  MonitorSmartphone,
   Phone,
   ShieldCheck,
   Workflow,
@@ -28,7 +30,7 @@ export const problemCards: ProblemCard[] = [
   {
     icon: Clock,
     title: "After-Hours Lead Loss",
-    body: "A large share of insurance and real estate inquiries happen outside business hours. Few companies have 24/7 AI agents to capture them — GoEasyAI works while you sleep.",
+    body: "A large share of customer inquiries happen outside business hours. Few companies have 24/7 AI agents to capture them — GoEasyAI works while you sleep.",
   },
   {
     icon: AlertTriangle,
@@ -69,6 +71,18 @@ export const systems: SystemCard[] = [
     title: "Process Automation",
     description:
       "Complete workflow automation from lead capture through onboarding. Reduce repetitive tasks and stop leads from falling through the cracks.",
+  },
+  {
+    icon: Megaphone,
+    title: "Facebook & Instagram Ads",
+    description:
+      "We run your Meta ads and send every lead straight into your CRM.",
+  },
+  {
+    icon: MonitorSmartphone,
+    title: "Website Development",
+    description:
+      "Fast, mobile-first websites connected to your CRM and booking calendar.",
   },
 ];
 
@@ -166,44 +180,34 @@ export function planInterestMessage(slug: string | undefined) {
 export type ResultCard = {
   industry: string;
   headline: string;
-  body: string;
+  before: string;
+  after: string;
   image: string;
-  stats: { value: string; label: string }[];
 };
 
 export const results: ResultCard[] = [
   {
-    industry: "Insurance Agency",
-    headline: "Speed to Lead Saves $847K in Lost Deals",
-    body: "Insurance agency implemented 24/7 AI voice agents after discovering they were losing 73% of after-hours leads. Now captures every inquiry within 30 seconds, converts 5x more prospects.",
+    industry: "Insurance Advisor",
+    headline: "After-Hours Calls Answered and Booked",
+    before: "after-hours calls went to voicemail.",
+    after:
+      "an AI voice agent answers 24/7, qualifies the caller and books a meeting.",
     image: "/problem-manual-work.jpg",
-    stats: [
-      { value: "30 sec", label: "Response Time" },
-      { value: "467%", label: "Conversion" },
-      { value: "$847K", label: "Recovered Revenue" },
-    ],
   },
   {
-    industry: "Real Estate",
-    headline: "From 6% to 89% Closing Rate With Instant Response",
-    body: "Real estate team was losing deals due to slow follow-up. Faster response times are widely linked to higher conversion, so the AI system responds in under 60 seconds and schedules showings instantly.",
+    industry: "Real Estate Agent",
+    headline: "Facebook Leads Contacted Instantly",
+    before: "Facebook leads waited hours for a reply.",
+    after: "instant WhatsApp + AI call, showing booked automatically.",
     image: "/services-ai-dashboard.jpg",
-    stats: [
-      { value: "45 sec", label: "Avg Response" },
-      { value: "89%", label: "Close Rate" },
-      { value: "1483%", label: "ROI Increase" },
-    ],
   },
   {
-    industry: "Independent Agent",
-    headline: "24/7 Availability Triples Lead Qualification",
-    body: "Solo agent was missing 68% of calls during client meetings. AI voice agents now handle all inquiries instantly, qualify leads, and book appointments while agent focuses on closing.",
+    industry: "Local Business",
+    headline: "Every Missed Call Followed Up Until Booked",
+    before: "missed calls and no follow-up.",
+    after:
+      "AI answers, sends booking link, and follows up until they book.",
     image: "/hero-ai-professional.jpg",
-    stats: [
-      { value: "24/7", label: "Availability" },
-      { value: "312%", label: "Lead Increase" },
-      { value: "0", label: "Missed Calls" },
-    ],
   },
 ];
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
 import { siteConfig } from "@/lib/site-config";
+import PixelEvents from "@/components/PixelEvents";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -16,9 +17,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: "GoEasyAI | Stop Losing Clients to Manual Processes",
+  title:
+    "GoEasyAI | AI CRM, Ads, Voice Agents & Websites for Canadian Businesses",
   description:
-    "Complete AI systems that automate your insurance and real estate operations, capture every lead, and deliver measurable ROI in 30 days.",
+    "Capture every lead, reply in seconds, and book appointments on autopilot — for real estate, insurance, clinics, restaurants, immigration and local businesses.",
+  other: {
+    "facebook-domain-verification": "x2e9hrat48shg5fzaiusj02oxvm111",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -29,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-navy-900 text-cream">
         {children}
+        <PixelEvents />
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)

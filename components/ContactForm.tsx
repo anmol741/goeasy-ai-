@@ -4,13 +4,7 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { businessTypes } from "@/lib/site-data";
-import { bookingLinkProps } from "@/lib/site-config";
-
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
+import { bookingLinkProps, trackPixel } from "@/lib/site-config";
 
 const WEBHOOK_URL = "/api/lead-webhook";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,7 +88,9 @@ export default function ContactForm({
         return;
       }
 
-      window.fbq?.("track", "Lead");
+      // Lead fires only after the webhook POST succeeds. Skip it when the
+      // honeypot is filled — the API fakes success for bots.
+      if (!website) trackPixel("Lead");
       resetForm();
       setStatus("success");
     } catch {

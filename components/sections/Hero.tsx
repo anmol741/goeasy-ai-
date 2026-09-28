@@ -13,23 +13,17 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-2">
         <div>
           <h1 className="animate-fade-up font-display text-4xl font-semibold leading-tight text-gold-500 sm:text-5xl">
-            GoEasyAI — Stop Losing Clients to Manual Processes
+            AI CRM, Ads, Voice Agents &amp; Websites — Built for Canadian
+            Businesses
           </h1>
 
           <p
-            className="animate-fade-up mt-5 text-lg font-medium text-cream"
+            className="animate-fade-up mt-5 max-w-lg text-lg font-medium text-cream"
             style={{ animationDelay: "0.1s" }}
           >
-            AI Automation for Modern Businesses
-          </p>
-
-          <p
-            className="animate-fade-up mt-4 max-w-lg text-base text-cream/70"
-            style={{ animationDelay: "0.2s" }}
-          >
-            Complete AI systems that automate your insurance and real estate
-            operations, capture every lead, and deliver measurable ROI in 30
-            days.
+            Capture every lead, reply in seconds, and book appointments on
+            autopilot — for real estate, insurance, clinics, restaurants,
+            immigration and local businesses.
           </p>
 
           <div

@@ -12,8 +12,8 @@ export default function Results() {
             <span className="text-gold-500">Can Look Like</span>
           </h2>
           <p className="mt-4 text-cream/70">
-            Example scenarios showing how AI systems can help insurance and
-            real estate professionals respond faster and capture more leads.
+            Example scenarios showing how AI systems can help businesses
+            respond faster and capture more leads.
           </p>
         </div>
 
@@ -45,21 +45,15 @@ export default function Results() {
                 <h3 className="mt-4 font-display text-lg font-semibold text-cream">
                   {result.headline}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-cream/70">
-                  {result.body}
-                </p>
-
-                <div className="mt-6 grid grid-cols-3 gap-2 border-t border-white/10 pt-5">
-                  {result.stats.map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <p className="font-display text-lg font-semibold text-gold-500">
-                        {stat.value}
-                      </p>
-                      <p className="mt-1 text-[11px] leading-tight text-cream/50">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
+                <div className="mt-4 flex flex-col gap-3 text-sm leading-relaxed">
+                  <p className="text-cream/60">
+                    <span className="font-semibold text-cream/80">Before:</span>{" "}
+                    {result.before}
+                  </p>
+                  <p className="border-t border-white/10 pt-3 text-cream/70">
+                    <span className="font-semibold text-gold-500">After:</span>{" "}
+                    {result.after}
+                  </p>
                 </div>
               </div>
             </div>

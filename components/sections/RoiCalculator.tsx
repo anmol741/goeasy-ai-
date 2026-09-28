@@ -79,7 +79,6 @@ export default function RoiCalculator() {
   const revenueLostMonthly = leadsLost * (closePct / 100) * clientValue;
   const revenueLostYearly = revenueLostMonthly * 12;
   const planCost = growthPlan.monthlyPrice;
-  const roiPct = ((revenueLostMonthly - planCost) / planCost) * 100;
 
   return (
     <section id="roi-calculator" className="bg-navy-900 py-24">
@@ -170,12 +169,6 @@ export default function RoiCalculator() {
                 <span className="font-semibold text-cream">
                   C${planCost}/month
                 </span>
-              </p>
-              <p className="mt-2 text-sm text-cream/75">
-                Estimated ROI if these leads are recovered:
-              </p>
-              <p className="mt-1 font-display text-4xl font-semibold text-gold-500">
-                {roiPct > 0 ? `${cad.format(Math.round(roiPct))}%` : "—"}
               </p>
             </div>
 
