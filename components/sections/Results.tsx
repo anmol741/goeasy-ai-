@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { results } from "@/lib/site-data";
 
+
+
 export default function Results() {
   return (
     <section id="results" className="bg-navy-950 py-24">
