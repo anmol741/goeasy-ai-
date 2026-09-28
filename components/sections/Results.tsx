@@ -14,8 +14,8 @@ export default function Results() {
             <span className="text-gold-500">Can Look Like</span>
           </h2>
           <p className="mt-4 text-cream/70">
-            Example scenarios showing how AI systems can help businesses
-            respond faster and capture more leads.
+            Example scenarios showing how AI helps businesses respond faster
+            and book more appointments.
           </p>
         </div>
 

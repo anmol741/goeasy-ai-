@@ -18,12 +18,10 @@ export default function ThankYouPage() {
       </div>
 
       <h1 className="mt-6 font-display text-3xl font-semibold text-cream sm:text-4xl">
-        Your Booking Is Confirmed
+        Your Strategy Call Is Booked
       </h1>
       <p className="mt-4 max-w-md text-cream/70">
-        Thanks for booking your strategy session. You&apos;ll receive a
-        calendar invite by email shortly. Maya from GoEasyAI may call to
-        confirm.
+        Your strategy call is booked. Maya from GoEasyAI may call to confirm.
       </p>
 
       <Link

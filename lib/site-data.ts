@@ -30,7 +30,7 @@ export const problemCards: ProblemCard[] = [
   {
     icon: Clock,
     title: "After-Hours Lead Loss",
-    body: "A large share of customer inquiries happen outside business hours. Few companies have 24/7 AI agents to capture them — GoEasyAI works while you sleep.",
+    body: "A large share of business inquiries happen outside business hours. Few companies have 24/7 AI agents to capture them — GoEasyAI works while you sleep.",
   },
   {
     icon: AlertTriangle,
@@ -188,7 +188,7 @@ export type ResultCard = {
 export const results: ResultCard[] = [
   {
     industry: "Insurance Advisor",
-    headline: "After-Hours Calls Answered and Booked",
+    headline: "Never Miss an After-Hours Call",
     before: "after-hours calls went to voicemail.",
     after:
       "an AI voice agent answers 24/7, qualifies the caller and books a meeting.",
@@ -196,17 +196,17 @@ export const results: ResultCard[] = [
   },
   {
     industry: "Real Estate Agent",
-    headline: "Facebook Leads Contacted Instantly",
+    headline: "Instant Reply to Every Facebook Lead",
     before: "Facebook leads waited hours for a reply.",
     after: "instant WhatsApp + AI call, showing booked automatically.",
     image: "/services-ai-dashboard.jpg",
   },
   {
     industry: "Local Business",
-    headline: "Every Missed Call Followed Up Until Booked",
+    headline: "Follow-Up That Never Stops",
     before: "missed calls and no follow-up.",
     after:
-      "AI answers, sends booking link, and follows up until they book.",
+      "AI answers, sends a booking link, and follows up until they book.",
     image: "/hero-ai-professional.jpg",
   },
 ];

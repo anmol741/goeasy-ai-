@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title:
     "GoEasyAI | AI CRM, Ads, Voice Agents & Websites for Canadian Businesses",
   description:
-    "Capture every lead, reply in seconds, and book appointments on autopilot — for real estate, insurance, clinics, restaurants, immigration and local businesses.",
+    "AI voice agents, chatbots, CRM, WhatsApp automation, Facebook ads and websites — capture every lead and book more appointments. Built for Canadian businesses.",
   other: {
     "facebook-domain-verification": "x2e9hrat48shg5fzaiusj02oxvm111",
   },
