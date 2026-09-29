@@ -40,11 +40,11 @@ export function trackPixel(event: string) {
 
 // Social profiles. Leave a URL empty ("") or "#" to hide it from the footer.
 export const socialLinks: { label: string; href: string }[] = [
-  { label: "X", href: "https://x.com/GoEasyAI" },
-  { label: "Instagram", href: "https://instagram.com/GoEasyAI" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/GoEasyAI" },
-  { label: "Facebook", href: "https://facebook.com/GoEasyAI" },
-  { label: "TikTok", href: "https://tiktok.com/@GoEasyAI" },
+  { label: "Instagram", href: "https://www.instagram.com/goeasyaisolutions/" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61582252568637",
+  },
   { label: "YouTube", href: "https://youtube.com/@GoEasyAI" },
 ];
 
