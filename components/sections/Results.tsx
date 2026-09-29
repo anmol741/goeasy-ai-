@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { results } from "@/lib/site-data";
 
-
-
 export default function Results() {
   return (
     <section id="results" className="bg-navy-950 py-24">
@@ -18,6 +16,7 @@ export default function Results() {
             and book more appointments.
           </p>
         </div>
+        
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {results.map((result, i) => (
