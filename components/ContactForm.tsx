@@ -15,6 +15,7 @@ import {
   whatsappLinkProps,
 } from "@/lib/site-config";
 
+
 const WEBHOOK_URL = "/api/lead-webhook";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_ERROR = "Please enter a valid 10-digit phone number.";
