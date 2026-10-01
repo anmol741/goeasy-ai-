@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const UPSTREAM_TIMEOUT_MS = 10_000;
-// CRM_WEBHOOK_URL overrides this (e.g. for a staging CRM).
-const DEFAULT_WEBHOOK_URL =
-  "https://myappzbackend.com/functions/v1/workflow-webhook/g6ckzkvjuqhc8ymv";
 const E164_NANP = /^\+1[2-9]\d{2}[2-9]\d{6}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FRIENDLY_ERROR =
@@ -79,7 +76,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const webhookUrl = process.env.CRM_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
+  const webhookUrl = process.env.CRM_WEBHOOK_URL;
+  if (!webhookUrl) {
+    console.error("[lead-webhook] CRM_WEBHOOK_URL is not configured.");
+    return NextResponse.json({ error: FRIENDLY_ERROR }, { status: 502 });
+  }
 
   const payload = JSON.stringify(lead);
   const headers: Record<string, string> = {
