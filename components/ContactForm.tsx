@@ -20,7 +20,6 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_ERROR = "Please enter a valid 10-digit phone number.";
 // Sentinel error: rendered as "Something went wrong" with call/WhatsApp links.
 const SEND_FAILED = "send-failed";
-
 const inputClass =
   "w-full min-w-0 rounded-lg border border-white/10 bg-navy-900 px-4 py-2.5 text-sm text-cream outline-none focus:border-gold-500";
 const labelClass = "text-sm font-medium text-cream/80";
