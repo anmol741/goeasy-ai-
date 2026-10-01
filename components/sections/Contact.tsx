@@ -1,6 +1,12 @@
 import { Mail, PhoneCall } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import { emailHref, phoneHref, siteConfig } from "@/lib/site-config";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import {
+  emailHref,
+  phoneHref,
+  siteConfig,
+  whatsappLinkProps,
+} from "@/lib/site-config";
 
 export default function Contact() {
   return (
@@ -28,12 +34,21 @@ export default function Contact() {
               {siteConfig.phone.display}
             </a>
           </div>
-          <a
-            href={phoneHref}
-            className="w-full shrink-0 rounded-lg bg-gold-500 px-6 py-3 text-center text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400 sm:w-auto"
-          >
-            Call Now
-          </a>
+          <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
+            <a
+              href={phoneHref}
+              className="rounded-lg bg-gold-500 px-6 py-3 text-center text-sm font-semibold text-navy-950 transition-transform hover:scale-105 hover:bg-gold-400"
+            >
+              Call Now
+            </a>
+            <a
+              {...whatsappLinkProps}
+              className="flex items-center justify-center gap-2 rounded-lg border border-gold-500/50 px-6 py-3 text-center text-sm font-semibold text-gold-400 transition-colors hover:border-gold-500 hover:bg-gold-500/10"
+            >
+              <WhatsAppIcon size={16} />
+              WhatsApp Us
+            </a>
+          </div>
         </div>
 
         <p className="mt-4 flex items-center justify-center gap-2 text-sm text-cream/60">

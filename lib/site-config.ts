@@ -7,14 +7,28 @@ export const siteConfig = {
   url: "https://goeasyai.ca",
   location: "Surrey, British Columbia, Canada",
   email: "info@goeasyai.ca",
+  // Answered by Maya, our AI voice agent.
   phone: {
-    display: "+1 (236) 242-5700",
-    e164: "+12362425700",
+    display: "+1 (236) 201-3810",
+    e164: "+12362013810",
+  },
+  whatsapp: {
+    display: "+1 (778) 718-0500",
+    e164: "+17787180500",
   },
 } as const;
 
 export const emailHref = `mailto:${siteConfig.email}`;
 export const phoneHref = `tel:${siteConfig.phone.e164}`;
+// Use with whatsappLinkProps so every WhatsApp link opens in a new tab.
+export const whatsappHref = `https://wa.me/${siteConfig.whatsapp.e164.slice(
+  1
+)}?text=Hi%20GoEasyAI%2C%20I%27d%20like%20to%20know%20more`;
+export const whatsappLinkProps = {
+  href: whatsappHref,
+  target: "_blank",
+  rel: "noopener noreferrer",
+} as const;
 
 // Strategy-session booking. Every booking button links to our own /book page
 // (Cal.com inline embed) via bookingLinkProps, so the Schedule pixel event fires.
@@ -32,9 +46,10 @@ declare global {
   }
 }
 
-export function trackPixel(event: string) {
+export function trackPixel(event: string, params?: Record<string, string>) {
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", event);
+    if (params) window.fbq("track", event, params);
+    else window.fbq("track", event);
   }
 }
 

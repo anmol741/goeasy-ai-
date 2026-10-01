@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import {
   activeSocialLinks,
   emailHref,
   phoneHref,
   siteConfig,
+  whatsappLinkProps,
 } from "@/lib/site-config";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-navy-950 py-14">
+    <footer className="border-t border-white/10 bg-navy-950 pt-14 pb-24 sm:pb-14">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-center sm:px-6">
         <span className="font-display text-2xl font-semibold text-gold-500">
           GoEasyAI
@@ -29,6 +31,13 @@ export default function Footer() {
           >
             <Phone size={16} />
             {siteConfig.phone.display}
+          </a>
+          <a
+            {...whatsappLinkProps}
+            className="flex items-center gap-2 hover:text-gold-400"
+          >
+            <WhatsAppIcon size={16} />
+            {siteConfig.whatsapp.display}
           </a>
         </div>
 

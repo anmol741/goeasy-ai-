@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
-import { siteConfig } from "@/lib/site-config";
+import { activeSocialLinks, siteConfig } from "@/lib/site-config";
 import PixelEvents from "@/components/PixelEvents";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -26,6 +27,21 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness"],
+  name: siteConfig.name,
+  url: siteConfig.url,
+  // +12362013810 -> +1-236-201-3810
+  telephone: siteConfig.phone.e164.replace(
+    /^\+1(\d{3})(\d{3})(\d{4})$/,
+    "+1-$1-$2-$3"
+  ),
+  email: siteConfig.email,
+  areaServed: "Canada",
+  sameAs: activeSocialLinks.map((link) => link.href),
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -33,7 +49,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-navy-900 text-cream">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         {children}
+        <FloatingWhatsApp />
         <PixelEvents />
         <Script id="meta-pixel" strategy="afterInteractive">
           {`

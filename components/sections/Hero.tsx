@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { bookingLinkProps } from "@/lib/site-config";
+import { bookingLinkProps, phoneHref, siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
@@ -43,6 +43,19 @@ export default function Hero() {
               Get Free ROI Calculator
             </Link>
           </div>
+
+          <p
+            className="animate-fade-up mt-5 text-sm text-cream/70"
+            style={{ animationDelay: "0.4s" }}
+          >
+            📞 Want to hear our AI in action? Call Maya now:{" "}
+            <a
+              href={phoneHref}
+              className="font-semibold whitespace-nowrap text-gold-500 hover:text-gold-400"
+            >
+              {siteConfig.phone.display}
+            </a>
+          </p>
         </div>
 
         <div

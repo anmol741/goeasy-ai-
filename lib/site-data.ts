@@ -64,7 +64,7 @@ export const systems: SystemCard[] = [
     icon: MessageCircle,
     title: "Intelligent Chatbots",
     description:
-      "Website visitors get instant answers about products, protection, and services. Capture contact info and handle scheduling around the clock.",
+      "Website visitors get instant answers about products, pricing, and services. Capture contact info and handle scheduling around the clock.",
   },
   {
     icon: Workflow,
@@ -282,11 +282,28 @@ export const securityBadges: SecurityBadge[] = [
 // --- Contact / business types -----------------------------------------------------
 
 export const businessTypes = [
-  "Insurance",
   "Real Estate",
+  "Insurance",
   "Immigration",
   "Healthcare/Clinic",
   "Restaurant/Hospitality",
   "Retail",
   "Other",
+] as const;
+
+export const serviceInterests = [
+  "CRM + Automation",
+  "Facebook & Instagram Ads",
+  "AI Voice Agent",
+  "AI Chatbot",
+  "Website Development",
+  "Full System (All)",
+] as const;
+
+export const monthlyLeadOptions = [
+  "0–20",
+  "20–100",
+  "100–500",
+  "500+",
+  "Not sure",
 ] as const;

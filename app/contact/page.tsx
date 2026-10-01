@@ -3,18 +3,20 @@ import { Mail, Phone } from "lucide-react";
 import TopBar from "@/components/layout/TopBar";
 import Footer from "@/components/layout/Footer";
 import ContactForm from "@/components/ContactForm";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { planInterestMessage } from "@/lib/site-data";
 import {
   bookingLinkProps,
   emailHref,
   phoneHref,
   siteConfig,
+  whatsappLinkProps,
 } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contact Us | GoEasyAI",
   description:
-    "Get in touch with GoEasyAI about AI chatbots, AI voice agents, CRM automation, and lead generation for your business. Call +1 (236) 242-5700 or email info@goeasyai.ca.",
+    `Get in touch with GoEasyAI about AI chatbots, AI voice agents, CRM automation, and lead generation for your business. Call ${siteConfig.phone.display}, WhatsApp ${siteConfig.whatsapp.display}, or email ${siteConfig.email}.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -51,6 +53,13 @@ export default async function ContactPage({
               >
                 <Phone size={16} className="text-gold-500" />
                 {siteConfig.phone.display}
+              </a>
+              <a
+                {...whatsappLinkProps}
+                className="flex items-center gap-2 hover:text-gold-400"
+              >
+                <WhatsAppIcon size={16} className="text-gold-500" />
+                {siteConfig.whatsapp.display}
               </a>
               <a
                 href={emailHref}

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy-policy" },
 };
 
-const LAST_UPDATED = "September 2026";
+const LAST_UPDATED = "October 2026";
 
 const sections: LegalSection[] = [
   {
@@ -46,6 +46,9 @@ const sections: LegalSection[] = [
           <li>Email address</li>
           <li>Phone number</li>
           <li>Business type</li>
+          <li>The service you&rsquo;re interested in</li>
+          <li>Your approximate monthly lead or call volume</li>
+          <li>Your consent to be contacted</li>
           <li>Any message or details you choose to include</li>
         </ul>
 
@@ -135,6 +138,21 @@ const sections: LegalSection[] = [
           <a href={emailHref}>{siteConfig.email}</a> instead.
         </p>
       </>
+    ),
+  },
+  {
+    id: "calls-ai-whatsapp",
+    title: "Calls, AI Assistant & WhatsApp",
+    content: (
+      <p>
+        When you submit a form on our website or through our ads, you agree
+        that GoEasyAI may contact you by phone, including calls made by our AI
+        assistant (Maya), by WhatsApp from {siteConfig.whatsapp.display}, and
+        by email about your enquiry. Calls may be recorded and summarized to
+        improve service and keep accurate records. You can opt out anytime by
+        replying STOP on WhatsApp, telling us on the call, or emailing{" "}
+        <a href={emailHref}>{siteConfig.email}</a>.
+      </p>
     ),
   },
   {

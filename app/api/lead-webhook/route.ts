@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const UPSTREAM_TIMEOUT_MS = 10_000;
+// CRM_WEBHOOK_URL overrides this (e.g. for a staging CRM).
+const DEFAULT_WEBHOOK_URL =
+  "https://myappzbackend.com/functions/v1/workflow-webhook/g6ckzkvjuqhc8ymv";
+const E164_NANP = /^\+1[2-9]\d{2}[2-9]\d{6}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FRIENDLY_ERROR =
   "Sorry, we couldn't send your message right now. Please try again in a moment, or email or call us directly.";
@@ -11,8 +15,12 @@ type LeadPayload = {
   name: string;
   email: string;
   phone: string;
-  message: string;
   business_type: string;
+  service_interest: string;
+  monthly_leads: string;
+  message: string;
+  // Sent as the string "true" so the CRM text field stores it.
+  consent: "true";
 };
 
 function field(body: Record<string, unknown>, key: string, maxLength = 500) {
@@ -42,8 +50,11 @@ export async function POST(request: NextRequest) {
     name: field(body, "name", 200),
     email: field(body, "email", 320),
     phone: field(body, "phone", 50),
-    message: field(body, "message", 5000),
     business_type: field(body, "business_type", 100),
+    service_interest: field(body, "service_interest", 100),
+    monthly_leads: field(body, "monthly_leads", 50),
+    message: field(body, "message", 5000),
+    consent: "true",
   };
 
   const fieldErrors: Partial<Record<keyof LeadPayload, string>> = {};
@@ -52,6 +63,14 @@ export async function POST(request: NextRequest) {
   else if (!EMAIL_PATTERN.test(lead.email))
     fieldErrors.email = "Please enter a valid email address.";
   if (!lead.phone) fieldErrors.phone = "Please enter your phone number.";
+  else if (!E164_NANP.test(lead.phone))
+    fieldErrors.phone = "Please enter a valid 10-digit phone number.";
+  if (!lead.business_type)
+    fieldErrors.business_type = "Please choose your business type.";
+  if (!lead.service_interest)
+    fieldErrors.service_interest = "Please choose what you need most.";
+  if (field(body, "consent") !== "true")
+    fieldErrors.consent = "Please tick the box to agree to be contacted.";
 
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
@@ -60,11 +79,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const webhookUrl = process.env.CRM_WEBHOOK_URL;
-  if (!webhookUrl) {
-    console.error("[lead-webhook] CRM_WEBHOOK_URL is not configured.");
-    return NextResponse.json({ error: FRIENDLY_ERROR }, { status: 500 });
-  }
+  const webhookUrl = process.env.CRM_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
 
   const payload = JSON.stringify(lead);
   const headers: Record<string, string> = {
